@@ -10,6 +10,15 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <header>
+    <% if request.path =='/' %>
+      <%= render partial: "layouts/customers_header" %>
+    <% else %>
+      <%= render partial: "layouts/admin_header" %>
+    <% end %>
+    <!--リクエストパスによって条件分岐で、表示を切り替えたが、そもそもadminとpublicはどう切り替えてもらうのか？adminを使うときはURLに/adminと入れてとお願いする?-->
+  </header>
+
   <body>
     <%= yield %>
   </body>

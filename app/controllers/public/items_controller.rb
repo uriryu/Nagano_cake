@@ -6,8 +6,8 @@ class Public::ItemsController < ApplicationController
   end
   
   
-  private
-  def item_params
-    params.require(:item).permit(:image)  
-  end
+  # private
+  # def item_params
+    # params.require(:item).permit(:image)  
+  # end
 end
