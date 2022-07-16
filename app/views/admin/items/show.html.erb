@@ -3,6 +3,14 @@
 <h2>商品詳細</h2>
 
 <div>
+  <% if @item.image.attached? %>
+    <%= image_tag @item.image, size: "350x300" %>
+  <% else %>
+    <%= image_tag 'no_image', size: "300x300" %>
+  <% end %>
+</div>
+
+<div>
   <p>商品名</p>
   <span><%= @item.name %></span>
 
