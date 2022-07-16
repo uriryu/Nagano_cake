@@ -1,2 +1,24 @@
 <h1>Admin::Items#index</h1>
-<p>Find me in app/views/admin/items/index.html.erb</p>
+<h1>商品一覧</h1>
+
+
+<% @items.each do |item| %>
+<div>
+  <p>商品ID</p>
+  <span><%= item.id %></span>
+
+  <p>商品名</p>
+  <span><%= item.name %></span>
+
+  <p>税抜価格</p>
+  <span><%= item.price %></span>
+
+  <p>ジャンル</p>
+  <span><%= item.genre.name %></span>
+
+  <p>販売ステータス</p>
+  <span><%= item.is_active %></span>
+</div>
+ <% end %>
+ 
+ <%= paginate @items %>
