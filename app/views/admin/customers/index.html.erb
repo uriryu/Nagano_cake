@@ -1,2 +1,21 @@
 <h1>Admin::Customers#index</h1>
-<p>Find me in app/views/admin/customers/index.html.erb</p>
+
+<h4>会員一覧</h4>
+
+<%= @customers.each do |customer| %>
+<div>
+  <p>会員ID</p>
+  <span><%= customer.id %></span>
+
+  <p>氏名</p>
+  <span><%= link_to customer.name, admin_customer_path(customer.id) %></span>
+
+  <p>メールアドレス</p>
+  <span><%= customer.email %></span>
+
+  <p>ステータス</p>
+  <span><%= customer.is_deleted %></span>
+</div>
+<% end %>
+
+<%= paginate @customers %>
