@@ -1,1 +1,43 @@
 <h1>Admin::Customers#edit</h1>
+
+<h4><%= @customer.first_name %><%= @customer.last_name %>の会員情報編集</h4>
+
+<%= form_with model: @customer do |f| %>
+
+<div>
+  <p>会員ID</p>
+  <span><%= @customer.id %></span>
+  
+  <p>氏名</p>
+  <span><%= f.text_field :first_name %></span>
+  <span><%= f.text_field :last_name %></span>
+  
+  <p>フリガナ</p>
+  <span><%= f.text_field :first_name_kana %></span>
+  <span><%= f.text_field :last_name_kana %></span>
+  
+  <p>郵便番号</p>
+  <span><%= f.text_field :postal_code %></span>
+  
+  <p>住所</p>
+  <span><%= f.text_field :address %></span>
+  
+  <p>電話番号</p>
+  <span><%= f.text_field :telephone_number %></span>
+  
+  <p>メールアドレス</p>
+  <span><%= f.text_field :email %></span>
+  
+  <p>会員ステータス</p>
+  <%= form_with(model: customer, local: true) do |form| %>
+    <%= form.radio_button :is_deleted, :false %>
+    <%= form.radio_button :is_deleted, "有効", {value: :false, style: "display: inline-block;"} %>
+    
+    <%= form.radio_button :is_deleted, :true %>
+    <%= form.radio_button :is_deleted, "退会", {value: :true, style: "display: inline-block;"} %>
+  <% end %>
+  
+  <p>≺%= f.submit '変更を保存' %></p>
+  
+</div>
+<% end %>
