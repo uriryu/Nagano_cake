@@ -1,2 +1,20 @@
 <h1>Admin::Homes#top</h1>
-<p>Find me in app/views/admin/homes/top.html.erb</p>
+<h4>注文履歴一覧(全会員のもの)</h4>
+
+<%= @orders.each do |order| %>
+<div>
+  <p>購入日時</p>
+  <span><%= order.created_at %></span>
+  
+  <p>購入者</p>
+  <span><%= order.name %></span>
+  
+  <p>注文個数</p>
+  <span><%= order_details.amound %></span>
+  
+  <p>注文ステータス</p>
+  <span><%= order.status %></span>
+</div>
+<% end %>
+
+<%= pagenate @orders %>

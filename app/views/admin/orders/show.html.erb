@@ -1,2 +1,65 @@
 <h1>Admin::Orders#show</h1>
-<p>Find me in app/views/admin/orders/show.html.erb</p>
+<h4>注文履歴詳細</h4>
+
+<div>
+  <p>購入者</p>
+  <span><%= link_to @order.name, admin_customer_path(customer.id) %></span>
+
+  <p>注文日</p>
+  <span><%= @order.created_at.strftime('%Y/%m/%d' ) %></span>
+
+  <p>配送先</p>
+  <span>〒<%= @order.postal_code %></span>
+  <span><%= @order.address %></span></br>
+  <span><%= @order.name %></span>
+
+  <p>支払方法</p>
+  <span><%= @order.payment_method %></span>
+
+  <p>注文ステータス</p>
+  <%= form_with model: @order, url: admin_order_path(@order.id), method: :patch do |f| %>
+    <span><%= f.select :status, @order.status.map { |status| [0, 1, 2, 3, 4] } %></span>
+
+    <span><%= f.submit '更新' %></span>
+  <% end %>
+</div>
+
+<!--顧客の注文した一覧を入れる？予定-->
+<% @order_details.each do |order_detail| %>
+
+<div>
+  <p>商品名</p>
+  <span><%= details.name %></span>
+
+  <p>単価(税込)</p>
+  <span><%= order_detail.price %></span>
+
+  <p>数量</p>
+  <span><%= order_detail.amount %></span>
+
+  <p>小計</p>
+  <span><%= order_detail.subtotal %></span>
+
+  <p>製作ステータス</p>
+  <%= form_with model: @order_detail, url: admin_orders_detail_path(@order_detail.id), method: :patch do |g| %>
+    <span><%= g.select :making_status, @order_detail.making_status.map { |making_status| [0, 1, 2, 3,] } %></span>
+
+    <span><%= g.submit '更新' %></span>
+  <% end %>
+</div>
+
+<% end %>
+
+<div>
+  <p>商品合計</p>
+  <% @order_details.each do |order_detail| %>
+    <% @total += order_detail.subtotal %>
+  <% end %>
+
+  <p>送料</p>
+  <%= order.postage %>
+
+  <p>請求合計額</p>
+  <%= order.total_payment %>
+  <!--modelに合計の両方のメソッドをつくる-->
+</div>

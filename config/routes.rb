@@ -18,13 +18,17 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   end
 
   namespace :admin do
-    resources :orders, only: [:show, :index, :update]
+    resources :orders, only: [:show, :update]
 
     resources :customers, only: [:index, :show, :edit, :update]
 
     resources :genres, only: [:new, :index, :create, :edit, :update]
 
     resources :items, only: [:new, :index, :show, :edit, :create, :update]
+
+    resources :orders_details, only: [:update]
+    get '/orders' => 'orders_details#index'
+
 
     root to: "homes#top"
   end
