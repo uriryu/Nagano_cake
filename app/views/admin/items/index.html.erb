@@ -8,7 +8,7 @@
   <span><%= item.id %></span>
 
   <p>商品名</p>
-  <span><%= link_to item.name, admin_item_path(item.id %></span>
+  <span><%= link_to item.name, admin_item_path(item.id) %></span>
 
   <p>税抜価格</p>
   <span><%= item.price %></span>
@@ -19,6 +19,7 @@
   <p>販売ステータス</p>
   <span><%= item.is_active %></span>
 </div>
- <% end %>
- 
+
+<% end %>
+
  <%= paginate @items %>
