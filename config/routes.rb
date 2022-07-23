@@ -35,20 +35,21 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
   # moduleはURLは変えたくないが、パスは変えたいときに使える!今回はpublicをパスの方に入れたかったので利用した
   scope module: :public do
+    # public doでくくっているときは =>のあと、/publicは不要
     resources :address, only: [:index, :edit, :create, :update, :destroy]
 
     resources :orders, only: [:new, :index, :show, :create]
-    get '/orders/complete' => 'public/orders#complete'
-    
-    post '/orders/confirm' => 'public/orders#confirm'
+    get '/orders/complete' => 'orders#complete'
+    post '/orders/confirm' => 'orders#confirm'
 
 
     resources :cart_items, only: [:index, :update, :destroy, :create]
-    delete '/cart_items/destroy_all' => 'public/cart_items#destroy_all'
+    delete '/cart_items/destroy_all' => 'cart_items#destroy_all'
 
-    resource :customers, only: [:show, :edit, :update]
-    get '/customers/unsubscribe' => 'public/customers#unsubscribe'
-    patch '/customers/withdraw' => 'public/customers#withdraw'
+    resource :customers, only: [:edit, :update]
+    get '/customers/my_page' => 'customers#show'
+    get '/customers/unsubscribe' => 'customers#unsubscribe'
+    patch '/customers/withdraw' => 'customers#withdraw'
 
     resources :items, only: [:index, :show]
   end
