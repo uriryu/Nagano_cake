@@ -13,9 +13,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 }
 
 
-  namespace :admin do
-    patch '/admin/orders_details/:id' => 'admin/orders_details#update'
-  end
 
   namespace :admin do
     resources :orders, only: [:show, :update]
@@ -28,7 +25,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
     resources :orders_details, only: [:update]
     get '/orders' => 'orders_details#index'
-
+    patch '/admin/orders_details/:id' => 'admin/orders_details#update'
 
     root to: "homes#top"
   end
@@ -46,9 +43,10 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :cart_items, only: [:index, :update, :destroy, :create]
     delete '/cart_items/destroy_all' => 'cart_items#destroy_all'
 
-    resource :customers, only: [:edit, :update]
     get '/customers/my_page' => 'customers#show'
     get '/customers/unsubscribe' => 'customers#unsubscribe'
+    get '/customers/information/edit' => 'customers#edit'
+    patch '/customers/information' => 'customers#update'
     patch '/customers/withdraw' => 'customers#withdraw'
 
     resources :items, only: [:index, :show]

@@ -11,12 +11,16 @@
   </head>
 
   <header>
-    <% if request.path =='/' %>
+    <% if admin_signed_in? %>
+      <%= render partial: "layouts/admin_header" %>
+    <% elsif customer_signed_in? %>
       <%= render partial: "layouts/customers_header" %>
     <% else %>
-      <%= render partial: "layouts/admin_header" %>
+      <%= render partial: "layouts/nomal_header" %>
     <% end %>
-    <!--リクエストパスによって条件分岐で、表示を切り替えたが、そもそもadminとpublicはどう切り替えてもらうのか？adminを使うときはURLに/adminと入れてとお願いする?-->
+    <!--リクエストパスによって条件分岐で、表示を切り替えたが、そもそもadminとpublicはどう切り替えてもらうのか？adminを使うときはURLに/adminと入れてとお願いする-->
+    <!--答え：URLを入れてもらう-->
+    <!--adminとpublicでサインインしていない状態(else)が重複していたのでそのelseを部分テンプレートで作り、条件分岐を3つにすることでそれぞれを分けて表示ができた-->
   </header>
 
   <body>
