@@ -2,29 +2,38 @@
 <html>
   <head>
     <title>NaganoCake</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <header>
-    <% if admin_signed_in? %>
-      <%= render partial: "layouts/admin_header" %>
-    <% elsif customer_signed_in? %>
-      <%= render partial: "layouts/customers_header" %>
-    <% else %>
-      <%= render partial: "layouts/nomal_header" %>
-    <% end %>
+  <header class="shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a class="navbar-brand" href="/">ロゴ</a>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto p-2">
+            <% if admin_signed_in? %>
+              <%= render partial: "layouts/admin_header" %>
+            <% elsif customer_signed_in? %>
+              <%= render partial: "layouts/customers_header" %>
+            <% else %>
+              <%= render partial: "layouts/nomal_header" %>
+            <% end %>
     <!--リクエストパスによって条件分岐で、表示を切り替えたが、そもそもadminとpublicはどう切り替えてもらうのか？adminを使うときはURLに/adminと入れてとお願いする-->
     <!--答え：URLを入れてもらう-->
     <!--adminとpublicでサインインしていない状態(else)が重複していたのでそのelseを部分テンプレートで作り、条件分岐を3つにすることでそれぞれを分けて表示ができた-->
-  </header>
-
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
   <body>
     <%= render 'layouts/flash' %>
     <%= yield %>
   </body>
+  <footer class="bg-dark text-white pt-5 pb-4"></footer>
 </html>

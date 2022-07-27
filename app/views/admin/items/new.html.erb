@@ -20,9 +20,9 @@
 
     <h4>販売ステータス</h4>
     <%= form_with(model: @item, local: true) do |form| %>
-      <%= form.radio_button :is_active, :true %>
+      <%= form.radio_button :is_active, "販売中" %>
       <%= form.label :is_active, "販売中", {value: :true, style: "display: inline-block;"} %>
-      <%= form.radio_button :is_active, :false %>
+      <%= form.radio_button :is_active, "販売停止中" %>
       <%=form.label :is_active, "販売停止中", {value: :false, style: "display: inline-block;"} %>
     <% end %>
 

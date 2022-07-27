@@ -1,12 +1,16 @@
 <!--個人の注文履歴をつくる場所-->
 
-<p><%= %>さんの注文履歴</p>
+<p><%= @order_detail.order.customer_id.fullname %>さんの注文履歴</p>
 
-<%= %>
+<% @order_details.each do |orderdetail| %>
 <div>
   <p>購入日時</p>
-  
+    <%= orderdetail.updated_at %>
   <p>注文個数</p>
-  
+    <%= orderdetail.amount %>
   <p>注文ステータス</p>
+    <%= orderdetail.order.status %>
 </div>
+<% end %>
+
+<%= paginate @order_details %>

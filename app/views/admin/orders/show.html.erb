@@ -50,16 +50,15 @@
 
 <% end %>
 
+<!--each文は繰り返し文のため外した-->
 <div>
   <p>商品合計</p>
-  <% @order_details.each do |order_detail| %>
     <% @total += order_detail.subtotal %>
-  <% end %>
 
   <p>送料</p>
-  <%= order.postage %>
+  <%= @order_detail.order.postage %>
 
   <p>請求合計額</p>
-  <%= order.total_payment %>
+  <%= @order_detail.order.total_payment %>
   <!--modelに合計の両方のメソッドをつくる-->
 </div>

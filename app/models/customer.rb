@@ -10,4 +10,13 @@ class Customer < ApplicationRecord
 # has_manyは複数形を記入するaddressは単数,addressesが
 
   enum is_deleted: {"退会": true, "有効": false, }
+
+  def fullname
+    "%s %s"%([self.first_name, self.last_name])
+  end
+
+  def fullname_kana
+    "%s %s"%([self.first_name_kana, self.last_name_kana])
+  end
+
 end

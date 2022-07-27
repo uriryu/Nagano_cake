@@ -1,21 +1,51 @@
 <h1>Admin::Customers#index</h1>
 
-<h4>会員一覧</h4>
+<h4 class="px-3 m-5">
+  <span class="bg-primary text-white">
+    会員一覧
+  </span>
+</h4>
 
-<%= @customers.each do |customer| %>
-<div>
-  <p>会員ID</p>
-  <span><%= customer.id %></span>
-
-  <p>氏名</p>
-  <span><%= link_to customer.name, admin_customer_path(customer.id) %></span>
-
-  <p>メールアドレス</p>
-  <span><%= customer.email %></span>
-
-  <p>ステータス</p>
-  <span><%= customer.is_deleted %></span>
-</div>
+<div class="container">
+<table class="table">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">会員ID</th>
+      <th scope="col">氏名</th>
+      <th scope="col">メールアドレス</th>
+      <th scope="col">ステータス</th>
+    </tr>
+  </thead>
+  <% @customers.each do |customer| %>
+  <tbody>
+    <tr>
+      <th scope="row">
+        <span>
+          <%= customer.id %>
+        </span>
+      </th>
+      <td>
+        <span>
+          <%= link_to customer.fullname, admin_customer_path(customer.id) %>
+        </span>
+      </td>
+      <td>
+        <span>
+          <%= customer.email %>
+        </span>
+      </td>
+      <td>
+        <span>
+          <% if customer.is_deleted == "有効" %>
+            <span class="text-success font-weight-bold"><%= customer.is_deleted %></span>
+          <% else %>
+            <span class="text-secondary font-weight-bold"><%= customer.is_deleted %></span>
+          <% end %>
+        </span>
+      </td>
+    </tr>
+  </tbody>
 <% end %>
-
+</table>
+</div>
 <%= paginate @customers %>

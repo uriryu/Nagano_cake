@@ -1,25 +1,37 @@
 <h1>Admin::Items#index</h1>
-<h1>商品一覧</h1>
 
 
-<% @items.each do |item| %>
-<div>
-  <p>商品ID</p>
-  <span><%= item.id %></span>
-
-  <p>商品名</p>
-  <span><%= link_to item.name, admin_item_path(item.id) %></span>
-
-  <p>税抜価格</p>
-  <span><%= item.price %></span>
-
-  <p>ジャンル</p>
-  <span><%= item.genre.name %></span>
-
-  <p>販売ステータス</p>
-  <span><%= item.is_active %></span>
+<div class="container">
+  <h4 class="px-1 m-3">
+    <span class="bg-light font-weight-bold">
+      商品一覧
+    </span>
+  </h4>
+  <table class="table">
+    <thead>
+      <th class="scope">商品ID</th>
+      <th class="scope">商品名</th>
+      <th class="scope">税別価格</th>
+      <th class="scope">ジャンル</th>
+      <th class="scope">販売ステータス</th>
+    </thead>
+  <% @items.each do |item| %>
+    <tbody>
+      <tr>
+        <th class="scope"><%= item.id %></th>
+        <td><%= link_to item.name, admin_item_path(item.id) %></td>
+        <td><%= item.price %></td>
+        <td><%= item.genre.name %></td>
+        <td>
+          <% if item.is_active == "販売中" %>
+            <span class="text-success font-weight-bold"><%= item.is_active %></span>
+          <% else %>
+            <span class="text-secondary font-weight-bold"><%= item.is_active %></span>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  <% end %>
+  </table>
 </div>
-
-<% end %>
-
  <%= paginate @items %>

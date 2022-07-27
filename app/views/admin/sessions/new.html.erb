@@ -1,26 +1,39 @@
-<h2>管理者ログイン</h2>
-
+<h4 class="px-3 m-5">
+  <span class="bg-info text-white">
+    管理者ログイン
+  </span>
+</h4>
+<!--%= form_with model: @admin, url: admin_session_path do |f| %>-->
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class="container">
+  <form class="form-horizontal" role="form">
+    <div class="form-group form-inline col-md-10">
+      <%= f.label :メールアドレス, class: "col-md-3 control-label" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control col-md-9", placeholder: "sample@examle.com" %>
     </div>
-  <% end %>
 
-  <div class="actions">
-    <%= f.submit "ログイン" %>
-  </div>
+    <div class="form-group form-inline col-md-10">
+      <%= f.label :パスワード, class: "col-md-3 control-label" %>
+      <%= f.password_field :password, autocomplete: "current-password", class: "form-control col-md-9" %>
+    </div>
+
+
+  <!--% if devise_mapping.rememberable? %>-->
+    <!--<div class="field">-->
+      <!--%= f.check_box :remember_me %>-->
+      <!--%= f.label :remember_me %>-->
+    <!--</div>-->
+  <!--% end %>-->
+
+    <div class="form-group">
+      <div class="form-inline col-md-10">
+        <!--offsetの使い方がわからない-->
+        <span class="col-md-3"></span>
+        <%= f.submit "ログイン", class: "btn btn-primary col-md-3" %>
+      </div>
+    </div>
+  </form>
+</div>
 <% end %>
 
 <%= render "admin/shared/links" %>
