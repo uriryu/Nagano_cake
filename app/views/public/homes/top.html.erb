@@ -1,2 +1,48 @@
 <h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+
+<!--<div>ジャンル検索予定-->
+  <!--<table>-->
+  <!--  <tbody>-->
+  <!--    <tr>-->
+  <!--      <th>-->
+  <!--        ジャンル検索-->
+  <!--      </th>-->
+  <!--    </tr>-->
+
+  <!--    <tr>-->
+  <!--      %= @genre.items.each do |item| %>-->
+  <!--        <td>-->
+  <!--          %= link_to item_path(item) do %>-->
+  <!--            %= genre.name %>-->
+  <!--          % end %>-->
+  <!--        </td>-->
+  <!--      % end %>-->
+  <!--    </tr>-->
+  <!--  </tbody>-->
+  <!--</table>-->
+<!--</div>-->
+<div class="container">
+  <div class="text-center border col-md-12 py-5">
+    ようこそ、ながのCAKEへ！</br>
+    このサイトは、ケーキ販売のECサイトになります。</br>
+    会員でない方も商品は閲覧できますが、</br>
+    購入には会員登録が必要になります。
+  </div>
+
+  <div class="mt-4">
+    <h2 class="mb-4">新着商品</h2>
+    <div class="row">
+
+        <% @items.each do |item| %>
+        <div class="flex-column mx-2">
+          <p><%= image_tag item.image, size: "250x250", class: "img-responsive" %></p>
+          <p><%= link_to item.name, item_path(item.id) %></p>
+          <p><%= item.price %></p>
+
+        </div>
+      <% end %>
+      <%= paginate @items %>
+    </div>
+    <div class="offset-md-10 mb-3"><%= link_to "すべての商品を見る>", items_path %></div>
+  </div>
+</div>

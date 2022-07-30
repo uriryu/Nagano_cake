@@ -1,39 +1,60 @@
 <h1>Public::Customers#show</h1>
-
-<h4>マイページ</h4>
-<div>
-  <span>登録情報</span>
-  <span><%= link_to "編集する", edit_customers_path %></span>
+<div class="container">
+<h3>
+  <span class="mb-4 bg-light">マイページ<span>
+</h3>
+<div class="row ">
+  <h3 >
+    <span class="font-weight-bold">登録情報</span>
+  </h3>
+  <span><%= link_to "編集する", customers_information_edit_path, class: "btn btn-success mx-5 border-primary" %></span>
 </div>
 
 <% @customers.each do |customer| %>
-<div>
+<div class="row mt-3">
   <!--ここはテーブルを使うべきだと思う.-->
-  <div>
-    <p>氏名</p>
-    <span><%= customer.first_name %> <%= customer.last_name %></span>
+  <table class="table table-bordered">
+    <tr>
+      <th class="col-md-3 table-active">氏名</th>
+      <td class="col-md-9"><%= customer.first_name %> <%= customer.last_name %></td>
+    </tr>
 
-    <p>カナ</p>
-    <span><%= customer.first_name_kana %> <%= customer.last_name_kana %></span>
+    <tr>
+      <th class="table-active">カナ</th>
+      <td><%= customer.first_name_kana %> <%= customer.last_name_kana %></td>
+    </tr>
 
-    <p>郵便番号</p>
-    <span><%= customer.postal_code %></span>
+    <tr>
+      <th class="table-active">郵便番号</th>
+      <td><%= customer.postal_code %></td>
+    </tr>
 
-    <p>住所</p>
-    <span><%= customer.address %></span>
+    <tr>
+      <th class="table-active">住所</th>
+      <td><%= customer.address %></td>
+    </tr>
 
-    <p>電話番号</p>
-    <span><%= customer.telephone_number %></span>
+    <tr>
+      <th class="table-active">電話番号</th>
+      <td><%= customer.telephone_number %></td>
+    </tr>
 
-    <p>メールアドレス</p>
-    <span><%= customer.email %></span>
-  </div>
+    <tr>
+      <th class="table-active">メールアドレス</th>
+      <td><%= customer.email %></td>
+    </tr>
+  </table>
 
 </div>
 <% end %>
 
-<h2>配送先</h2>
-<%= link_to "一覧を見る", address_index_path %>
+  <div class="row py-3">
+    <h2>配送先　</h2>
+    <%= link_to "一覧を見る", address_index_path, class: "btn btn-primary col-md-2 mx-5" %>
+  </div>
 
-<h2>注文履歴</h2>
-<%= link_to "一覧を見る", orders_path %>
+  <div class="row py-3">
+    <h2>注文履歴</h2>
+    <%= link_to "一覧を見る", orders_path, class: "btn btn-primary col-md-2 mx-5" %>
+  </div>
+</div>

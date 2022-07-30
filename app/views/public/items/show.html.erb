@@ -1,4 +1,39 @@
 <h1>Public::Items#show</h1>
-<p>Find me in app/views/public/items/show.html.erb</p>
-<p>画像</p>
-  <%= image_tag item.image, size: "200x200" %>
+<div class="container">
+
+  <div class="row">
+    <%= image_tag @item.image, size: "350x300", class: "img-responsive  my-5" %>
+
+    <table class="mx-5 my-5 col-md-6">
+      <tr>
+        <th>
+          <h1 class="font-weight-bold"><%= @item.name %></h1>
+        </th>
+      </tr>
+      <tr>
+        <th>
+          <h4><%= @item.introduction %></h4>
+        </th>
+      </tr>
+
+      <tr>
+        <th>
+          <h4>￥<%= @item.with_tax_price %>(税込)</h4>
+        </th>
+      </tr>
+
+      <tr>
+        <th>
+          <%= form_with(model: @cart_item, url: cart_items_path, method: :post, local: true, class: "row")  do |form| %>
+            <%= form.hidden_field :item_id, value: @item.id %>
+            <%= form.select :amount, *[1..4], {include_blank: '個数選択'}, class: "form-control col-md-3 mx-3" %>
+            <%= form.submit "カートに入れる", class: "btn btn-success col-md-3 mx-5" %>
+          <% end %>
+        </th>
+      </tr>
+
+    </table>
+
+  </div>
+
+</div>

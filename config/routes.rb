@@ -39,15 +39,17 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     get '/orders/complete' => 'orders#complete'
     post '/orders/confirm' => 'orders#confirm'
 
-
-    resources :cart_items, only: [:index, :update, :destroy, :create]
-    delete '/cart_items/destroy_all' => 'cart_items#destroy_all'
-
+    resources :cart_items, only: [:index, :update, :destroy, :create] do
+    collection do
+      delete 'destroy_all' => 'cart_items#destroy_all'
+      end
+    end
     get '/customers/my_page' => 'customers#show'
     get '/customers/unsubscribe' => 'customers#unsubscribe'
     get '/customers/information/edit' => 'customers#edit'
     patch '/customers/information' => 'customers#update'
     patch '/customers/withdraw' => 'customers#withdraw'
+
 
     resources :items, only: [:index, :show]
   end
