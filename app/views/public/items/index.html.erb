@@ -1,2 +1,23 @@
 <h1>Public::Items#index</h1>
-<p>Find me in app/views/public/items/index.html.erb</p>
+<div class="container-fluid">
+
+  <div class="row m-4">
+    <div class="col-2">
+      <%= render 'admin/genres/list', genres: @genre %>
+    </div>
+
+
+    <div>
+      <h2 class="mb-4">商品一覧</h2>
+      <div class="row mx-2">
+        <% @items.each do |item| %>
+        <div class="flex-column mx-2">
+          <p><%= image_tag item.image, size: "250x250", class: "img-responsive" %></p>
+          <p><%= item.name %></p>
+          <p>￥<%= item.price %></p>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

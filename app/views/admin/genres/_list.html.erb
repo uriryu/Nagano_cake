@@ -1,0 +1,7 @@
+<table class="border">
+  <th class="border-bottom px-5">ジャンル検索</th>
+  <% @genres.each do |list| %>
+  <tr><td class="p-2 text-center"><%= link_to list.name, items_path %></td></tr>
+    <!--genre.id でリンクを飛ぶことで、一覧をジャンル関連のみにする。indexではif文を使うと予想-->
+  <% end %>
+</table>

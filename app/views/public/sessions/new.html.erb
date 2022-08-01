@@ -1,32 +1,43 @@
-<h2>ログイン</h2>
+<div class="container my-5">
+  <h2 class="mb-5">
+    <span class="bg-light">ログイン</span>
+  </h2>
 
-<p>会員の方はこちらからログイン</p>
+  <h4 class="mx-3 mb-4">
+    <span class="bg-light">会員の方はこちらからログイン</span>
+  </h4>
 
-<%= form_with model: @customer, url: new_customer_session_path do |f| %>
-  <div class="field">
-    <%= f.label :メールアドレス %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "example@example.com" %>
-  </div>
+  <div class="">
+    <%= form_with model: @customer, url: new_customer_session_path do |f| %>
+      <div class="row">
+        <%= f.label :メールアドレス, class: "mx-5" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "example@example.com", class: "form-control col-md-6" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :パスワード %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+      <div class="row my-3">
+        <%= f.label :パスワード　　, class: "mx-5" %><br />
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-control col-md-6" %>
+      </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+    <!--% if devise_mapping.rememberable? %>-->
+      <!--<div class="field">-->
+        <!--%= f.check_box :remember_me %>-->
+        <!--%= f.label :remember_me %>-->
+      <!--</div>-->
+    <!--% end %>-->
+
+      <div class="actions mx-3">
+        <%= f.submit "ログイン", class: "btn btn-primary col-md-2 offset-md-2" %>
+      </div>
+    <% end %>
+
+    <h5 class="mt-5">
+      <span class="bg-light">会員登録がお済みでない方</span>
+    </h5>
+
+    <div class="m-4">
+      <a href="/customers/sign_up">こちら</a> から新規登録を行ってください。
     </div>
-  <% end %>
 
-  <div class="actions">
-    <%= f.submit "ログイン" %>
   </div>
-<% end %>
-
-<p>会員登録がお済みでない方</p>
-
-<div>
-  <a href="/customers/sign_up">こちら</a> から新規登録を行ってください。
 </div>
