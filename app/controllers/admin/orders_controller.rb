@@ -20,6 +20,10 @@ class Admin::OrdersController < ApplicationController
     redirect_to admin_order_path(order.id)
   end
   
+  def index
+    @orders = Order.all
+  end
+  
   private
   
   def order_params

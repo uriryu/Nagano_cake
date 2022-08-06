@@ -2,7 +2,7 @@
 
   <div class="row my-4">
     <div class="ml-5 col-md-2">
-      <%= render 'admin/genres/list', genres: @genre %>
+      <%= render 'admin/genres/list', genres: @genres %>
     </div>
     <div class="text-center border col-md-6 py-5">
       ようこそ、ながのCAKEへ！</br>
@@ -14,7 +14,7 @@
 
 
   <div class="mt-4 offset-md-2">
-    <h2 class="mb-4 col-md-5">新着商品</h2>
+    <h2 class="mb-4 col-md-5 font-weight-bold">新着商品</h2>
     <div class="row col-md-5">
 
         <% @items.each do |item| %>
@@ -27,6 +27,6 @@
       <% end %>
       <%= paginate @items %>
     </div>
-    <div class="offset-md-10 mb-3"><%= link_to "すべての商品を見る>", items_path %></div>
+    <div class="offset-md-10 mb-3"><%= link_to "全ての商品を見る>", items_path %></div>
   </div>
 </div>

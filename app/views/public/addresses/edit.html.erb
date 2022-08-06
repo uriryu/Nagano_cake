@@ -1,0 +1,25 @@
+<div class="container my-5">
+  <h4 class="my-5">
+    <span class="bg-light">配送先編集</span>
+  </h4>
+
+  <div class="row">
+    <div class="col-md-3">
+      <p class="m-4">郵便番号(ハイフンなし)</p>
+      <p class="m-4">住所</p>
+      <p class="m-4">宛名</p>
+    </div>
+
+    <div class="col-md-8">
+      <%= form_with model: @address do |f| %>
+        <div class="m-3"><%= f.text_field :postal_code, class: "col-md-4 form-control" %></div>
+        <div class="m-3"><%= f.text_field :address, class: "col-md-7 form-control" %></div>
+        <div class="row m-3">
+          <%= f.text_field :name, class: "col-md-4 form-control" %>
+          <%= f.submit '変更内容を保存', class: "btn btn-success col-md-3 offset-md-4" %>
+        </div>
+        
+      <% end %>
+    </div>
+  </div>
+</div>

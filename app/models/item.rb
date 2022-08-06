@@ -4,7 +4,7 @@ class Item < ApplicationRecord
   has_many :cart_items, dependent: :destroy
   has_many :orders_details, dependent: :destroy
   belongs_to :genre
-  belongs_to :home
+  
 
   enum is_active: { "販売中": true, "販売停止中": false }
 

@@ -1,25 +1,56 @@
 <h1>Admin::Items#edit</h1>
+<div class="container">
+  <h4>
+    <span class="bg-light">商品編集</span>
+  </h4>
 
-<h4>商品編集</h4>
+  <%= form_with model: @item, url: admin_item_path(@item.id), method: :patch do |f| %>
 
-<%= form_with model: @item, url: admin_item_path(@item.id), method: :patch do |f| %>
-<div>
-  <p>商品画像</p>
-  <%= f.file_field :image, accept: "image/*" %>
+  <div class="row m-4">
+    <p>商品画像</p>
+    <span class="col-md-3 mx-5">
+      <%= f.file_field :image, accept: "image/*" %>
+    </span>
+  </div>
 
-  <p>商品名</p>
-  <%= f.text_field :name %>
+  <div class="row m-4">
+    <p>商品名　</p>
+    <span class="col-md-3 mx-5">
+      <%= f.text_field :name, class: "form-control" %>
+    </span>
+  </div>
 
-  <p>商品説明</p>
-  <%= f.text_area :introduction %>
+  <div class="row m-4">
+    <p>商品説明</p>
+    <span class="col-md-3 mx-5">
+      <%= f.text_area :introduction, class: "form-control" %>
+    </span>
+  </div>
 
-  <p>ジャンル</p>
-  <span><%= f.select :genre_id, Genre.all.map { |genre| [genre.name, genre.id] } %></span>
+  <div class="row m-4">
+    <p>ジャンル</p>
+    <span class="col-md-3 mx-5">
+      <%= f.select :genre_id, Genre.all.map { |genre| [genre.name, genre.id] } %>
+    </span>
+  </div>
 
-  <p>税抜価格</p>
-  <span><%= f.text_field :price, data: { autonumeric: true } %></span>
+  <div class="row m-4">
+    <p>税抜価格</p>
+      <span class="col-md-2 mx-5 d-flex flex-row">
+        <%= f.text_field :price, data: { autonumeric: true }, class: "form-control" %><span class="m-2">円</span>
+      </span>
+  </div>
 
-  <p><%= f.submit '変更を保存' %></p>
+  <div class="row m-4">
+    <span>販売ステータス</span>
+    <%= f.radio_button :is_active, "販売中", class: "mx-3" %>
+    <%= f.label :is_active, "販売中", {value: :true, style: "display: inline-block;"} %>
 
+    <%= f.radio_button :is_active, "販売停止中", class: "mx-3" %>
+    <%= f.label :is_active, "販売停止中", {value: :false, style: "display: inline-block;"} %>
+  </div>
+    <div class="m-3"><%= f.submit '変更を保存', class: "btn btn-success offset-md-2" %></div>
+  
+  </div>
+  <% end %>
 </div>
-<% end %>

@@ -33,7 +33,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   # moduleはURLは変えたくないが、パスは変えたいときに使える!今回はpublicをパスの方に入れたかったので利用した
   scope module: :public do
     # public doでくくっているときは =>のあと、/publicは不要
-    resources :address, only: [:index, :edit, :create, :update, :destroy]
 
     resources :orders, only: [:new, :index, :show, :create]
     get '/orders/complete' => 'orders#complete'
@@ -44,12 +43,17 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
       delete 'destroy_all' => 'cart_items#destroy_all'
       end
     end
+    
     get '/customers/my_page' => 'customers#show'
     get '/customers/unsubscribe' => 'customers#unsubscribe'
     get '/customers/information/edit' => 'customers#edit'
     patch '/customers/information' => 'customers#update'
     patch '/customers/withdraw' => 'customers#withdraw'
-
+    
+    resources :addresses, only: [:index, :edit, :create, :update, :destroy]
+    # ネストするときとは、URLで"特定のするもの"があるときにネストする。
+    # 今回customersの中にネストを入れるとURLの方にcustomer_idが追加される。
+    # bookersのときは"誰の","どの投稿"に"コメントを書く"というように判別しなくてはならなかった為ネストを入れていた。
 
     resources :items, only: [:index, :show]
   end

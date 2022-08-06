@@ -1,23 +1,59 @@
-<h1>Public::Items#index</h1>
 <div class="container-fluid">
 
-  <div class="row m-4">
+  <div class="row m-5">
+    
     <div class="col-2">
-      <%= render 'admin/genres/list', genres: @genre %>
+      <%= render 'admin/genres/list', genres: @genres %>
     </div>
-
-
-    <div>
-      <h2 class="mb-4">商品一覧</h2>
-      <div class="row mx-2">
-        <% @items.each do |item| %>
-        <div class="flex-column mx-2">
-          <p><%= image_tag item.image, size: "250x250", class: "img-responsive" %></p>
-          <p><%= item.name %></p>
-          <p>￥<%= item.price %></p>
-        </div>
-        <% end %>
+  
+  
+  <% if params[:genre_id].present? %>
+  <div class="mx-2">
+    <h2 class="mb-4 font-weight-bold">ジャンル一覧(全<%= @items.where('created_at').count %>件)</h2>
+    <table>
+      <tbody>
+        <tr>
+          <div class="row mx-2">
+          <% @items.each do |item| %>
+            <div class="flex-column mx-2">
+              <td>
+              <%= link_to item_path(item) do %>
+                <%= image_tag item.image, size: "250x250", class: "img-responsive" %><br>
+                <%= item.name %><br>
+                ￥<%= item.price %>
+              <% end %>
+              </td>
+            </div>
+          <% end %>
+          </div>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <% else %>
+  
+    <div class="mx-2">
+      <h2 class="mb-4 font-weight-bold">商品一覧(全<%= @items.where('created_at').count %>件)</h2>
+      <table>
+        <tbody>
+          <tr>
+            <div class="row mx-2">
+              <% @items.each do |item| %>
+                <div class="flex-column mx-2">
+                <td>
+                <%= link_to item_path(item) do %>
+                  <%= image_tag item.image, size: "250x250", class: "img-responsive" %><br>
+                  <%= item.name %><br>
+                  ￥<%= item.price %>
+                <% end %>
+                </td>
+              </div>
+              <% end %>
+              </div>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>
