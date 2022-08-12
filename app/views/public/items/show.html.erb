@@ -29,7 +29,7 @@
 
       <tr>
         <th>
-          <%= form_with(model: @cart_item, url: cart_items_path, method: :post, local: true, class: "row")  do |form| %>
+          <%= form_with(model: @cart_item, url: cart_items_path, method: :post, local: true, class: "row") do |form| %>
             <%= form.hidden_field :item_id, value: @item.id %>
             <%= form.select :amount, *[1..4], {include_blank: '個数選択'}, class: "form-control col-md-4 mx-4" %>
             <%= form.submit "カートに入れる", class: "btn btn-success col-md-4 mx-4" %>

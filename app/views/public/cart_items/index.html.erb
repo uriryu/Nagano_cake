@@ -7,20 +7,24 @@
   </div>
 
   <table class="table table-bordered">
-    <tr class="text-center">
+    <tr class="text-center bg-light">
       <th class="col-md-4">商品名</th>
       <th class="col-md-2">単価(税込)</th>
       <th class="col-md-2">数量</th>
       <th class="col-md-2">小計</th>
+      <th></th>
     </tr>
       <% total = 0 %>
 
   <% if current_customer.cart_items.present? %>
       <% @cart_items.each do |cart_item| %>
        <tr>
-         <td><%= cart_item.item.name %></td>
-         <td><%= (cart_item.item.with_tax_price).to_i %></td>
-         <td>
+          <td>
+            <%= image_tag cart_item.item.image, size: "60x50", class: "img-responsive" %>
+            <%= cart_item.item.name %>
+          </td>
+          <td><%= (cart_item.item.with_tax_price).to_i %></td>
+          <td>
           <%= form_with model: cart_item, url: cart_item_path(cart_item), local: true, method: :patch do |f| %>
             <%= f.select :amount, *[1..10] %>
             <%= f.submit "変更", class: "btn btn-success mx-3" %>
@@ -38,12 +42,15 @@
        <% end %>
   <% end %>
   </table>
-  
+
 <div class="row my-5">
   <%= link_to "買い物を続ける", root_path, class: "btn btn-primary col-md-3" %>
   <table class="table table-bordered col-md-4 offset-md-8">
-      <tr><th>合計金額</th></tr>
-      <tr><td><%= total %></td></tr>
+      <tr>
+        <th class="col-sm-3 bg-light">合計金額</th>
+        <th class="col-sm-3"><%= total %></th>
+      </tr>
+      
 
   </table>
 </div>

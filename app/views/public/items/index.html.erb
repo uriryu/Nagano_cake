@@ -32,28 +32,30 @@
   </div>
   <% else %>
   
-    <div class="mx-2">
-      <h2 class="mb-4 font-weight-bold">商品一覧(全<%= @items.where('created_at').count %>件)</h2>
-      <table>
-        <tbody>
-          <tr>
-            <div class="row mx-2">
-              <% @items.each do |item| %>
-                <div class="flex-column mx-2">
-                <td>
-                <%= link_to item_path(item) do %>
-                  <%= image_tag item.image, size: "250x250", class: "img-responsive" %><br>
-                  <%= item.name %><br>
-                  ￥<%= item.price %>
-                <% end %>
-                </td>
-              </div>
+  <div class="mx-2">
+    <h2 class="mb-4 font-weight-bold">商品一覧(全<%= @items.where('created_at').count %>件)</h2>
+    <table>
+      <tbody>
+        <tr>
+          <div class="row mx-2">
+            <% @items.each do |item| %>
+            <div class="flex-column mx-2">
+              <td>
+              <%= link_to item_path(item) do %>
+                <%= image_tag item.image, size: "250x250", class: "img-responsive" %><br>
+                <%= item.name %><br>
+                ￥<%= item.price %>
               <% end %>
-              </div>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+              </td>
+            </div>
+            <% end %>
+          </div>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  </div>
   <% end %>
+  
 </div>

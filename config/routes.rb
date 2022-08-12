@@ -23,9 +23,9 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
     resources :items, only: [:new, :index, :show, :edit, :create, :update]
 
-    resources :orders_details, only: [:update]
     get '/orders' => 'orders_details#index'
     patch '/admin/orders_details/:id' => 'admin/orders_details#update'
+    resources :orders_details, only: [:update]
 
     root to: "homes#top"
   end
@@ -34,22 +34,24 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   scope module: :public do
     # public doでくくっているときは =>のあと、/publicは不要
 
-    resources :orders, only: [:new, :index, :show, :create]
     get '/orders/complete' => 'orders#complete'
     post '/orders/confirm' => 'orders#confirm'
+    resources :orders, only: [:new, :index, :show, :create]
+    # resourcesで定義したルートより前に自作URLを置かないとorder/:idの方にヒットしてしまい、id=completeでshowを呼び出すのように、別のページを呼び出してしまう。
+
 
     resources :cart_items, only: [:index, :update, :destroy, :create] do
     collection do
       delete 'destroy_all' => 'cart_items#destroy_all'
       end
     end
-    
+
     get '/customers/my_page' => 'customers#show'
     get '/customers/unsubscribe' => 'customers#unsubscribe'
     get '/customers/information/edit' => 'customers#edit'
     patch '/customers/information' => 'customers#update'
     patch '/customers/withdraw' => 'customers#withdraw'
-    
+
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
     # ネストするときとは、URLで"特定のするもの"があるときにネストする。
     # 今回customersの中にネストを入れるとURLの方にcustomer_idが追加される。

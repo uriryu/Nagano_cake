@@ -6,13 +6,42 @@ class Public::OrdersController < ApplicationController
     @addresses = current_customer.addresses.all
   end
 
+  def create
+    @order = Order.new(order_params)
+    @order.customer_id = current_customer.id
+    @order.save
+
+    # order_detailに保存する。
+    current_customer.cart_items.each do |cart_item|
+      @order_detail = OrderDetail.new
+      @order_detail.order_id = @order.id
+      @order_detail.item_id = cart_item.item_id
+      @order_detail.amount = cart_item.amount
+      @order_detail.price = (cart_item.item.with_tax_price).floor
+      @order_detail.save
+    end
+    #ループを終了する
+
+    # ここからはカート内を削除する
+    current_customer.cart_items.destroy_all
+    redirect_to orders_complete_path
+    # hiddenでorderに保存するためconfirmに記述すること。
+    # orderはviewでorderdetailはコントローラーで記述する理由はなぜ？adminとcustomerでわかれているから？質問する
+    # 答え：f.submitを開始したときに作動するのがcreateメソッド、これが上から順に始まる。その中に"OrderDetailの保存"を組み込むことによってカート商品それぞれをeach文の繰り返しによってすべて各々保存される。
+    # 表示する必要がないので、コントローラに記述。
+  end
+
   def complete
   end
 
   def index
+    @orders = Order.all
+    @order_detail = OrderDetail.all
   end
 
   def show
+    @order = Order.find(params[:id])
+    @order_detail = @order.order_details
   end
 
   def confirm

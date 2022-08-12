@@ -1,3 +1,89 @@
-<h1>Public::Orders#show</h1>
-<p>Find me in app/views/public/orders/show.html.erb</p>
-こっち
+<div class="container my-5">
+  <h4>
+    <span class="bg-light">注文情報</span>
+    <span class="offset-md-5 bg-light">請求情報</span>
+  </h4>
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th class="col-sm-1 bg-light">注文日</th>
+            <th class="col-sm-3"><%= @order.updated_at.strftime('%Y/%m/%d') %></th>
+          </tr>
+          <tr>
+            <th class="bg-light">配送先</th>
+            <th>
+              〒<%= @order.postal_code %><br>
+                <%= @order.address %><br>
+                <%= @order.name %>
+            </th>
+          </tr>
+          <tr>
+            <th class="bg-light">支払方法</th>
+            <th><%= @order.payment_method_i18n %></th>
+          </tr>
+          <tr>
+            <th class="bg-light">ステータス</th>
+            <th><%= @order.status_i18n %></th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-4">
+      <table class="table table-bordered">
+        <tbody>
+        <tr>
+          <th class="bg-light">商品合計</th>
+          <th>
+            <% total = 0 %>
+            <% @order.order_details.each do |order_detail| %>
+            <% subtotal = (order_detail.price.to_i*order_detail.amount).to_i %>
+            <% total += subtotal %>
+            <% end %>
+            <%= total.to_s(:delimited) %>
+            <!--41818418と表示された理由はpriceがstring（文字列）で保存されていたから。-->
+          </th>
+        </tr>
+        <tr>
+          <th class="bg-light">配送料</th>
+          <th><%= @order.postage %></th>
+        </tr>
+        <tr>
+          <th class="bg-light">ご請求額</th>
+          <th><%= @order.total_payment.to_s(:delimited) %></th>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="my-5">
+    <h4 class="my-3">
+      <span class="bg-light">注文内容</span>
+    </h4>
+    <table class="table table-bordered">
+      <thead>
+        <tr class="bg-light">
+          <th>商品</th>
+          <th>単価(税込)</th>
+          <th>個数</th>
+          <th>小計</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order.order_details.each do |order_detail| %>
+        <tr>
+          <td><%= order_detail.item.name %></td>
+          <td><%= order_detail.price %></td>
+          <td><%= order_detail.amount %></td>
+          <td>
+            <% subtotal = (order_detail.price.to_i*order_detail.amount).to_i %>
+            <%= subtotal.to_s(:delimited) %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
