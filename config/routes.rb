@@ -15,17 +15,21 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
 
   namespace :admin do
-    resources :orders, only: [:show, :update]
+    resources :orders, only: [:show, :update] do
+      resources :order_details, only: [:index]
+    end
 
-    resources :customers, only: [:index, :show, :edit, :update]
+    resources :customers, only: [:index, :show, :update]
+    get 'customers/:id/edit' => 'customers#edit', as: :customer_edit
+    # updateより後にするため、editを手作りしてもらった。URLでどこからかぐちゃぐちゃなものが入ってきて、editを表示している状態。
 
     resources :genres, only: [:new, :index, :create, :edit, :update]
 
     resources :items, only: [:new, :index, :show, :edit, :create, :update]
 
-    get '/orders' => 'orders_details#index'
-    patch '/admin/orders_details/:id' => 'admin/orders_details#update'
-    resources :orders_details, only: [:update]
+
+    resources :order_details, only: [:update]
+
 
     root to: "homes#top"
   end

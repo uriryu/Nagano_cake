@@ -1,4 +1,5 @@
 class Admin::ItemsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   def index
     @items = Item.all.page(params[:page])
   end
@@ -9,8 +10,8 @@ class Admin::ItemsController < ApplicationController
 
   def create
     item = Item.new(item_params)
-    item.save
-    redirect_to '/admin/items'
+    item.save!
+    redirect_to admin_items_path
   end
 
   def show

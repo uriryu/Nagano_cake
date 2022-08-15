@@ -1,64 +1,98 @@
 <h1>Admin::Orders#show</h1>
-<h4>注文履歴詳細</h4>
+<div class="container">
+  <h4>
+    <span class="bg-light">注文履歴詳細</span>
+  </h4>
 
-<div>
-  <p>購入者</p>
-  <span><%= link_to @order.name, admin_customer_path(customer.id) %></span>
-
-  <p>注文日</p>
-  <span><%= @order.created_at.strftime('%Y/%m/%d' ) %></span>
-
-  <p>配送先</p>
-  <span>〒<%= @order.postal_code %></span>
-  <span><%= @order.address %></span></br>
-  <span><%= @order.name %></span>
-
-  <p>支払方法</p>
-  <span><%= @order.payment_method %></span>
-
-  <p>注文ステータス</p>
-  <%= form_with model: @order, url: admin_order_path(@order.id), method: :patch do |f| %>
-    <span><%= f.select :status, @order.status.map { |status| [0, 1, 2, 3, 4] } %></span>
-
-    <span><%= f.submit '更新' %></span>
-  <% end %>
-</div>
-
-<!--顧客の注文した一覧を入れる？予定-->
-<% @order_details.each do |order_detail| %>
-
-<div>
-  <p>商品名</p>
-  <span><%= details.name %></span>
-
-  <p>単価(税込)</p>
-  <span><%= order_detail.price %></span>
-
-  <p>数量</p>
-  <span><%= order_detail.amount %></span>
-
-  <p>小計</p>
-  <span><%= order_detail.subtotal %></span>
-
-  <p>製作ステータス</p>
-  <%= form_with model: @order_detail, url: admin_orders_detail_path(@order_detail.id), method: :patch do |g| %>
-    <span><%= g.select :making_status, @order_detail.making_status.map { |making_status| [0, 1, 2, 3,] } %></span>
-
-    <span><%= g.submit '更新' %></span>
-  <% end %>
-</div>
-
-<% end %>
+  <div class="row my-5">
+    <div class="col-md-3">
+      <p class="font-weight-bold">購入者</p>
+      <p class="font-weight-bold">注文日</p>
+      <p class="font-weight-bold my-4">配送先</p>
+      <p class="font-weight-bold my-4">支払方法</p>
+      <p class="font-weight-bold my-4">注文ステータス</p>
+    </div>
+    <div class="col-md-4">
+      <p><%= link_to @order.customer.fullname, admin_customer_path(@order.customer.id) %></p>
+      <p class=""><%= @order.created_at.strftime('%Y/%m/%d') %></p>
+      <p class="">
+      〒<%= @order.postal_code %>
+        <%= @order.address %><br>
+        <%= @order.name %>
+      </p>
+      <p class=""><%= @order.payment_method_i18n %></p>
+      <div class="form-group mr-3">
+        <%= form_with model: @order, url: admin_order_path(@order.id), class: 'form-inline', method: :patch do |f| %>
+          <%= f.select :status, Order.statuses_i18n.invert, {}, class: 'col-sm-5 form-control' %>
+          <%= f.submit '更新', class: 'btn btn-primary offset-sm-2' %>
+        <% end %>
+      </div>
+    </div>
+<!--div row div題名/div divコード/divにすると縦が題名　ですっきりはいる-->
+  <table class="table col-md-8 my-4">
+    <thead class="bg-light">
+      <tr>
+        <th>商品名</th>
+        <th>単価(税込)</th>
+        <th>数量</th>
+        <th>小計</th>
+        <th>製作ステータス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @order_detail.item.name %></td>
+        <td><%= @order_detail.price %></td>
+        <td><%= @order_detail.amount %></td>
+        <td><%= subtotal = @order_detail.price.to_i*@order_detail.amount %></td>
+        <td>
+          <%= form_with model: @order_detail, url: admin_order_detail_path(@order.id), class: 'form-inline', method: :patch do |g| %>
+            <%= g.select :making_status, OrderDetail.making_statuses_i18n.invert, {}, class: 'form-control' %>
+            <%= g.submit '更新', class: 'btn btn-primary offset-sm-2' %>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
 <!--each文は繰り返し文のため外した-->
-<div>
-  <p>商品合計</p>
-    <% @total += order_detail.subtotal %>
-
-  <p>送料</p>
-  <%= @order_detail.order.postage %>
-
-  <p>請求合計額</p>
-  <%= @order_detail.order.total_payment %>
+<div class="col-md-3 offset-md-1 row mt-5 ">
+  
+  <div>
+    <p class="font-weight-bold">
+      商品合計
+    </p>
+    <p class="font-weight-bold">
+      送料
+    </p>
+    <p class="font-weight-bold">
+      請求合計額
+    </p>
+  </div>
+  <div class="offset-md-2">
+    <p>
+      <span>
+        <% total = 0 %>
+        <% @order.order_details.each do |order_detail| %>
+          <% subtotal = (order_detail.price.to_i*order_detail.amount).to_i %>
+          <% total += subtotal %>
+        <% end %>
+        <%= total.to_s(:delimited) %>円
+      </span>
+    </p>
+    <p>
+      <span>
+        <%= @order.postage %>円
+      </span>
+    </p>
+    <p>
+      <span>
+        <%= @order_detail.order.total_payment.to_s(:delimited) %>円
+      </span>
+    </p>
+  </div>
+  
   <!--modelに合計の両方のメソッドをつくる-->
+</div>
+</div>
 </div>

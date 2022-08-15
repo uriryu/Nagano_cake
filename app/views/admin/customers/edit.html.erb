@@ -1,19 +1,15 @@
-<h1>Admin::Customers#edit</h1>
-
-
-
-<%= form_with model: @customer, url: admin_customer_path(@customer.id), method: :patch do |f| %>
-
-<form class="form-horizontal">
+<!--<form class="form-horizontal">-->
+<!--↑これのせいで、わけのわからないURLが生成されてしまう。-->
   <div class="container">
-    
-    <h4>
+  <%= form_with model: @customer, url: admin_customer_path(@customer.id) do |f| %>
+
+    <h4 class="m-4">
       <span class="bg-light"><%= @customer.fullname %> の会員情報編集</span>
     </h4>
-    
+
     <div class="row mb-3">
-      <label class="col-form-label col-sm-2">会員ID</label>
-      <span><%= @customer.id %></span>
+      <label class="col-form-label col-sm-2 my-2">会員ID</label>
+      <p class="m-3"><%= @customer.id %></p>
     </div>
 
     <div class="row mb-3 ">
@@ -27,39 +23,39 @@
       <span class="col-sm-2"><%= f.text_field :first_name_kana, class: "form-control" %></span>
       <span class="col-sm-2"><%= f.text_field :last_name_kana, class: "form-control" %></span>
     </div>
-    
+
     <div class="row mb-3">
       <label class="col-form-label col-sm-2">郵便番号</label>
       <span class="col-sm-2"><%= f.text_field :postal_code, class: "form-control" %></span>
     </div>
-    
+
     <div class="row mb-3 ">
       <label class="col-form-label col-sm-2">住所</label>
       <span class="col-sm-4"><%= f.text_field :address, class: "form-control" %></span>
     </div>
-    
+
     <div class="row mb-3">
       <label class="col-form-label col-sm-2">電話番号</label>
       <span class="col-sm-2"><%= f.text_field :telephone_number, class: "form-control" %></span>
     </div>
-    
+
     <div class="row mb-3">
       <label class="col-form-label col-sm-2">メールアドレス</label>
       <span class="col-sm-2"><%= f.text_field :email, class: "form-control" %></span>
     </div>
-    
+
     <div class="row mb-3">
       <label class="col-form-label col-sm-2">会員ステータス</label>
         <%= f.radio_button :is_deleted, "有効", class: "mx-3" %>
         <%= f.label :is_deleted, "有効", {value: :false, style: "display: inline-block;"} %>
-    
+
         <%= f.radio_button :is_deleted, "退会", class: "mx-3" %>
         <%= f.label :is_deleted, "退会", {value: :true, style: "display: inline-block;"} %>
 <!--ラジオボタンのために|form|のブロック変数を新たに作成しなくてよい。作ってしまうと情報を引っ張ってこれない。2重になって表示ができない？。-->
     </div>
     <div class="text-center">
       <%= f.submit "変更を保存", class: "btn btn-success mb-3 col-sm-2" %>
+      <% end %>
     </div>
   </div>
-</form>
-<% end %>
+<!--</form>-->

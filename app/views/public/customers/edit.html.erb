@@ -1,18 +1,10 @@
-
 <%= form_with model: @customer, url: customers_information_path, method: :patch do |f| %>
-
 <form class="form-horizontal">
-  <div class="container">
-
-    <h4>
+  <div class="container my-5">
+    <h4 class="mb-5">
       <span class="bg-light"><%= @customer.fullname %> の会員情報編集</span>
     </h4>
-
-    <div class="row mb-3">
-      <label class="col-form-label col-sm-2">会員ID</label>
-      <span><%= @customer.id %></span>
-    </div>
-
+    
     <div class="row mb-3 ">
       <label class="col-form-label col-sm-2">氏名</label>
       <span class="col-sm-2"><%= f.text_field :first_name, class: "form-control" %></span>
@@ -37,12 +29,12 @@
 
     <div class="row mb-3">
       <label class="col-form-label col-sm-2">電話番号</label>
-      <span class="col-sm-2"><%= f.text_field :telephone_number, class: "form-control" %></span>
+      <span class="col-sm-3"><%= f.text_field :telephone_number, class: "form-control" %></span>
     </div>
 
     <div class="row mb-3">
       <label class="col-form-label col-sm-2">メールアドレス</label>
-      <span class="col-sm-2"><%= f.text_field :email, class: "form-control" %></span>
+      <span class="col-sm-3"><%= f.text_field :email, class: "form-control" %></span>
     </div>
 
     <div class="offset-md-2">
