@@ -2,7 +2,7 @@
   <h4>
     <span class="bg-light">商品詳細</span>
   </h4>
-  
+
   <div class="row">
     <!--div classの間が半角スペースでないとclassが作用しない。ctrl shift i でクラスのあと""の中身が青いと作用している。紫は通常のタグ認識。-->
     <div class="col-md-3 py-3">
@@ -20,7 +20,7 @@
       <p class="ml-5 my-3">税込価格(税抜価格)</p>
       <p class="ml-5 my-3">販売ステータス</p>
     </div>
-    
+
     <div class="col-md-4">
       <p class="my-3"><%= @item.name %></p>
       <p class="my-3"><%= @item.introduction %></p>
@@ -30,10 +30,10 @@
           (<%= @item.price %>)円
       </p>
       <p class="my-2">
-          <% if @item.is_active == "販売中" %>
-            <span class="text-success font-weight-bold"><%= @item.is_active %></span>
+          <% if @item.is_active == true %>
+            <span class="text-success font-weight-bold">販売中</span>
           <% else %>
-            <span class="text-success font-weight-bold"><%= @item.is_active %></span>
+            <span class="text-secondary font-weight-bold">販売停止中</span>
           <% end %>
       </p>
     </div>

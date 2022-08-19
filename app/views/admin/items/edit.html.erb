@@ -1,6 +1,5 @@
-<h1>Admin::Items#edit</h1>
 <div class="container">
-  <h4>
+  <h4 class="my-4">
     <span class="bg-light">商品編集</span>
   </h4>
 
@@ -50,10 +49,8 @@
     <%= f.radio_button :is_active, :false, class: "mx-3" %>
     <%= f.label :is_active, "販売停止中", {value: :false, style: "display: inline-block;"} %>
   </div>
-  
 
   <p class="m-3"><%= f.submit '変更を保存', class: "btn btn-success offset-md-2" %></p>
   </div>
   <% end %>
-  </div>
- 
+</div>

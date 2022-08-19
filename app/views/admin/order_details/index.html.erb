@@ -1,28 +1,31 @@
 <!--個人の注文履歴をつくる場所-->
-<div class="container">
-  <h4 class="m-4">
-    <span><%= @order_detail.order.customer.fullname %>さんの注文履歴</span>
+<div class="container my-4">
+  <h4 class="my-4">
+    <span><%= @customer.fullname %>さんの注文履歴</span>
   </h4>
   <div>
-  
-    <table class="table">
-      <thead>
+    <table class="table table-bordered">
+      <thead class="bg-light">
         <tr>
           <th>購入日時</th>
           <th>注文個数</th>
           <th>注文ステータス</th>
+          <th></th>
         </tr>
       </thead>
+      <% @orders.each do |order| %>
       <tbody>
-        <% @order_details.each do |order_detail| %>
         <tr>
-          <td><%= link_to order_detail.updated_at.strftime('%Y/%m/%d %H:%M:%S'), admin_order_path(order_detail.order_id) %></td>
-          <!--link先のidが上手くいっていない。2から始まったり,4が重複していたり11があったりする。rails c でOrderDetail.allをするとidは10個まで。-->
-          <td><%= order_detail.amount %></td>
-          <td><%= order_detail.order.status_i18n %></td>
+          <td class="col-sm-2 align-middle"><%= order.created_at.strftime('%Y/%m/%d') %></td>
+          <td class="align-middle"><%= order.order_details.sum(:amount) %></td>
+          <td class="align-middle"><%= order.status_i18n %></td>
+          <td class="align-middle"><%= link_to "表示する", admin_order_path(order), class: "btn btn-primary" %></td>
         </tr>
-        <% end %>
       </tbody>
+      <% end %>
     </table>
+  </div>
+  <div class="offset-md-5 my-5">
+    <%= paginate @orders %>
   </div>
 </div>

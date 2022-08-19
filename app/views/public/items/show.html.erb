@@ -1,14 +1,16 @@
-
 <div class="container">
 
   <div class="row">
-    <div class="col-md-3 mt-5">
+    <div class="col-md-3 my-5">
       <%= render 'admin/genres/list', genres: @genres %>
     </div>
-
-
-    <%= image_tag @item.image, size: "350x300", class: "img-responsive  my-5" %>
-
+    <div class="m-5">
+      <% if @item.image.attached? %>
+        <%= image_tag @item.image, size: "250x200", class: "img-responsive" %><br>
+      <% else %>
+        <%= image_tag 'no_image', size: "200x200" %><br>
+      <% end %>
+    </div>
     <table class="mx-5 my-5 col-md-4">
       <tr>
         <th>

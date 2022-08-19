@@ -66,6 +66,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
     root to: 'public/homes#top'
     get '/about' => 'public/homes#about', as: 'about'
-
+    get 'search' => 'public/items#search'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

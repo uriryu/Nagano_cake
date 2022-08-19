@@ -9,8 +9,6 @@ class Customer < ApplicationRecord
   has_many :addresses, dependent: :destroy
 # has_manyは複数形を記入するaddressは単数,addressesが
 
-  enum is_deleted: {"退会": true, "有効": false, }
-
   def fullname
     "%s %s"%([self.first_name, self.last_name])
   end

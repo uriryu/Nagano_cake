@@ -9,51 +9,48 @@
   <span><%= link_to "編集する", customers_information_edit_path, class: "btn btn-success mx-5 border-primary" %></span>
 </div>
 
-<% @customers.each do |customer| %>
 <div class="row mt-3">
   <!--ここはテーブルを使うべきだと思う.-->
   <table class="table table-bordered">
     <tr>
       <th class="col-md-3 table-active">氏名</th>
-      <td class="col-md-9"><%= customer.first_name %> <%= customer.last_name %></td>
+      <td class="col-md-9"><%= @customer.first_name %> <%= @customer.last_name %></td>
     </tr>
 
     <tr>
       <th class="table-active">カナ</th>
-      <td><%= customer.first_name_kana %> <%= customer.last_name_kana %></td>
+      <td><%= @customer.first_name_kana %> <%= @customer.last_name_kana %></td>
     </tr>
 
     <tr>
       <th class="table-active">郵便番号</th>
-      <td><%= customer.postal_code %></td>
+      <td><%= @customer.postal_code %></td>
     </tr>
 
     <tr>
       <th class="table-active">住所</th>
-      <td><%= customer.address %></td>
+      <td><%= @customer.address %></td>
     </tr>
 
     <tr>
       <th class="table-active">電話番号</th>
-      <td><%= customer.telephone_number %></td>
+      <td><%= @customer.telephone_number %></td>
     </tr>
 
     <tr>
       <th class="table-active">メールアドレス</th>
-      <td><%= customer.email %></td>
+      <td><%= @customer.email %></td>
     </tr>
   </table>
 
 </div>
-<% end %>
+<div class="row py-3">
+  <h2>配送先　</h2>
+  <%= link_to "一覧を見る",  addresses_path, class: "btn btn-primary col-md-2 mx-5" %>
+</div>
 
-  <div class="row py-3">
-    <h2>配送先　</h2>
-    <%= link_to "一覧を見る",  addresses_path, class: "btn btn-primary col-md-2 mx-5" %>
-  </div>
-
-  <div class="row py-3">
-    <h2>注文履歴</h2>
-    <%= link_to "一覧を見る", orders_path, class: "btn btn-primary col-md-2 mx-5" %>
-  </div>
+<div class="row py-3">
+  <h2>注文履歴</h2>
+  <%= link_to "一覧を見る", orders_path, class: "btn btn-primary col-md-2 mx-5" %>
+</div>
 </div>

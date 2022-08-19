@@ -35,10 +35,11 @@
     <tr>
       <th scope="col">会員ステータス</th>
       <td>
-        <% if @customer.is_deleted == "有効" %>
-          <span class="text-success"><%= @customer.is_deleted %></span>
+        <!--boolean型には、enumを使わない、使ってしまうとDBにも設定したenumの文字が保存されてしまう。-->
+        <% if @customer.is_deleted == false %>
+          <span class="text-success">有効</span>
         <% else %>
-          <span class="text-secondary"><%= @customer.is_deleted %></span>
+          <span class="text-secondary">退会</span>
         <% end %>
       </td>
     </tr>
@@ -46,6 +47,6 @@
 </table>
 <div>
   <span><%= link_to "編集する", admin_customer_edit_path(@customer.id), class: "btn btn-success m-3" %></span>
-  <span><%= link_to "注文履歴一覧を見る", admin_root_path, class: "btn btn-primary m-3" %></span>
+  <span><%= link_to "注文履歴一覧を見る", admin_order_order_details_path(@customer.id), class: "btn btn-primary m-3" %></span>
 </div>
 </div>

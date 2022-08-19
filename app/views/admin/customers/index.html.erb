@@ -1,5 +1,4 @@
 <div class="container">
-
 <h4 class="px-3 m-5">
   <span class="bg-light">
     会員一覧
@@ -46,5 +45,7 @@
 <% end %>
 </table>
 </div>
-<%= paginate @customers %>
+  <div class="offset-md-5 my-5">
+    <%= paginate @customers %>
+  </div>
 </div>

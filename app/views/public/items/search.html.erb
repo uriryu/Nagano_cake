@@ -1,0 +1,24 @@
+<div class="container my-5">
+  <h4 class="mb-4">
+    <span class="bg-light">検索結果</span>
+  </h4>
+  <table class="table">
+    <% @items.each do |item| %>
+      <tbody>
+      <tr>
+        <th class="scope"><%= image_tag item.image, size: "60x50", class: "img-responsive" %></th>
+        <td class="align-middle"><%= link_to item.name, admin_item_path(item.id) %></td>
+        <td class="align-middle"><%= item.price %></td>
+        <td class="align-middle"><%= item.genre.name %></td>
+        <td class="align-middle">
+          <% if item.is_active == "販売中" %>
+            <span class="text-success font-weight-bold"><%= item.is_active %></span>
+          <% else %>
+            <span class="text-secondary font-weight-bold"><%= item.is_active %></span>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+    <% end %>
+  </table>
+</div>

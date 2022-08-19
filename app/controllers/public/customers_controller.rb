@@ -2,7 +2,7 @@ class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
 
   def show
-    @customers = Customer.all
+    @customer = current_customer
   end
 
   def edit
@@ -16,13 +16,22 @@ class Public::CustomersController < ApplicationController
   end
 
   def unsubscribe
+    @customer = current_customer
   end
-  
+
+  def withdraw
+    @customer = Customer.find(current_customer.id)
+    @customer.update(is_deleted: true)
+    reset_session
+    flash[:notice] = "ご利用ありがとうございました。退会が完了しました。"
+    redirect_to root_path
+  end
+
   private
 
   def customer_params
     params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :email, :encrypted_password, :postal_code, :address, :telephone_number)
   end
 
-  
+
 end

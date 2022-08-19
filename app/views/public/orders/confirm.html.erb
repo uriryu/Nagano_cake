@@ -16,7 +16,11 @@
         <tr>
           <td>
             <!--%= attachment_image_tag(cart_item.item, :image, size: "60x50") %>-->
-            <%= image_tag cart_item.item.image, size: "60x50", class: "img-responsive" %>
+            <% if cart_item.item.image.attached? %>
+              <%= image_tag cart_item.item.image, size: "60x50", class: "img-responsive" %>
+            <% else %>
+              <%= image_tag 'no_image', size: "60x50" %>
+            <% end %>
             <%= cart_item.item.name %>
           </td>
           <td>

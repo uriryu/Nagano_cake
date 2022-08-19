@@ -46,10 +46,10 @@
 
     <div class="row mb-3">
       <label class="col-form-label col-sm-2">会員ステータス</label>
-        <%= f.radio_button :is_deleted, "有効", class: "mx-3" %>
+        <%= f.radio_button :is_deleted, :false, class: "mx-3" %>
         <%= f.label :is_deleted, "有効", {value: :false, style: "display: inline-block;"} %>
 
-        <%= f.radio_button :is_deleted, "退会", class: "mx-3" %>
+        <%= f.radio_button :is_deleted, :true, class: "mx-3" %>
         <%= f.label :is_deleted, "退会", {value: :true, style: "display: inline-block;"} %>
 <!--ラジオボタンのために|form|のブロック変数を新たに作成しなくてよい。作ってしまうと情報を引っ張ってこれない。2重になって表示ができない？。-->
     </div>

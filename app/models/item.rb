@@ -5,10 +5,12 @@ class Item < ApplicationRecord
   has_many :orders_details
   belongs_to :genre
 
-  enum is_active: { "販売中": true, "販売停止中": false }
-
   def with_tax_price
     (price * 1.1).floor
+  end
+
+  def self.search(keyword)
+    where(['name like?', "%#{keyword}"])
   end
 
 end

@@ -1,19 +1,16 @@
-<h1>Admin::Genres#edit</h1>
-
-
 <div class="container">
-  
+
   <h3 class="my-5">
     <span class="bg-light">ジャンル編集</span>
   </h3>
-  
+
   <div class="row my-5">
     <%= form_with model: @genre, url: edit_admin_genre_path do |f| %>
 
       <span class="mx-4">ジャンル名</span>
 
     <%= f.text_field :name, class: "mx-4" %>
-  
+
     <%= f.submit '変更を保存', class: "btn btn-success mx-4" %>
 
     <% end %>

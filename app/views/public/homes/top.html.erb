@@ -15,18 +15,31 @@
 
   <div class="mt-4 offset-md-2">
     <h2 class="mb-4 col-md-5 font-weight-bold">新着商品</h2>
-    <div class="row col-md-5">
+    <div class="row col-md-12">
 
         <% @items.each do |item| %>
         <div class="flex-column mx-2">
-          <p><%= image_tag item.image, size: "250x250", class: "img-responsive" %></p>
+          <p>
+            <% if item.image.attached? %>
+              <%= image_tag item.image, size: "250x200", class: "img-responsive" %><br>
+            <% else %>
+              <%= image_tag 'no_image', size: "200x200" %><br>
+            <% end %>
+          </p>
           <p><%= link_to item.name, item_path(item.id) %></p>
           <p>￥<%= item.price %></p>
 
         </div>
       <% end %>
+
+    </div>
+    
+    <div class="offset-md-10 mb-3">
+      <%= link_to "全ての商品を見る>", items_path %>
+      </div>
+    <div class="offset-sm-4">
       <%= paginate @items %>
     </div>
-    <div class="offset-md-10 mb-3"><%= link_to "全ての商品を見る>", items_path %></div>
+    
   </div>
 </div>

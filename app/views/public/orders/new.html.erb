@@ -3,8 +3,8 @@
     <span class="bg-lighm-5">注文情報入力</span>
   </h4>
 <!--form_with の中にform_withはかけない、今回は同じものを2度書いていたので、一つを消すことによって、１つで丸ごと作成する形を作った-->
-  <div>
-    <%= form_with model: @order, url: orders_confirm_path, method: :post, local: true do |f| %>
+  <%= form_with model: @order, url: orders_confirm_path, method: :post, local: true do |f| %>
+  <!--form_withはdivを跨ぐとリロードがviewで必要になってしまうので、跨ぐことがないように！-->
     <h4 class="font-weight-bold">支払方法</h4>
       <h5 class="offset-sm-1">
         <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
@@ -15,10 +15,8 @@
         <%= f.label :payment_method, Order.payment_methods_i18n[:transfer] %>
       </h5>
 
-  </div>
-
   <div class="my-5">
-    
+
     <h4 class="font-weight-bold">お届け先</h4>
       <h5 class="offset-sm-1">
         <%= f.radio_button :address_option, 0, checked: "checked" %>
@@ -70,6 +68,7 @@
         </table>
       </h5>
       <span class="offset-md-3"><%= f.submit "確認画面へ進む", class: "btn btn-primary m-5 col-md-3" %></span>
-     <% end %>
+
   </div>
+  <% end %>
 </div>
