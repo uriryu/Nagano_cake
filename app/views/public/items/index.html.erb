@@ -18,7 +18,11 @@
             <div class="flex-column mx-2">
               <td>
               <%= link_to item_path(item) do %>
+                <% if item.image.attached? %>
                 <%= image_tag item.image, size: "250x200", class: "img-responsive" %><br>
+              <% else %>
+                <%= image_tag 'no_image', size: "200x200" %><br>
+               <% end %>
                 <%= item.name %><br>
                 ￥<%= item.price %>
               <% end %>

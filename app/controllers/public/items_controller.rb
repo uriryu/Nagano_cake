@@ -1,5 +1,5 @@
 class Public::ItemsController < ApplicationController
-  
+
   def search
     @items = Item.search(params[:keyword])
     @keyword = params[:keyword]
@@ -13,7 +13,7 @@ class Public::ItemsController < ApplicationController
     if params[:genre_id].present?
       # presentメソッドでparams[:genre_id]に値が含まれているか確認　=> trueの場合下記を実行
       @genre = Genre.find(params[:genre_id])
-      @items = @genre.items
+      @items = @genre.items.page(params[:page]).per(4)
     end
   end
 

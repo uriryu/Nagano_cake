@@ -41,7 +41,7 @@ class Public::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @order_detail = @order.order_details
+    @order_detail = @order.order_details.all
   end
 
   def confirm

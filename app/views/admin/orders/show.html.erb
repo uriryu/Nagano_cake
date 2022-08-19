@@ -46,8 +46,8 @@
           <td><%= order_detail.amount %></td>
           <td><%= subtotal = order_detail.price.to_i*order_detail.amount %></td>
           <td>
-            <!--making_statusが変更できなくなった。-->
-          <%= form_with model: @order_detail, url: admin_order_detail_path(@order.id), class: 'form-inline', method: :patch do |g| %>
+          <!--making_statusが変更できなくなった。-->
+          <%= form_with model: order_detail, url: admin_order_detail_path(order_detail), class: 'form-inline', method: :patch do |g| %>
             <%= g.select :making_status, OrderDetail.making_statuses_i18n.invert, {}, class: 'form-control' %>
             <%= g.submit '更新', class: 'btn btn-primary offset-sm-2' %>
           <% end %>

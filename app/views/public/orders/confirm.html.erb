@@ -13,8 +13,8 @@
     </tr>
       <% total = 0 %>
         <% @cart_items.each do |cart_item| %>
-        <tr>
-          <td>
+        <tr class="text-center">
+          <td class="align-middle">
             <!--%= attachment_image_tag(cart_item.item, :image, size: "60x50") %>-->
             <% if cart_item.item.image.attached? %>
               <%= image_tag cart_item.item.image, size: "60x50", class: "img-responsive" %>
@@ -23,13 +23,13 @@
             <% end %>
             <%= cart_item.item.name %>
           </td>
-          <td>
+          <td class="align-middle">
             <%= (cart_item.item.with_tax_price).to_s(:delimited) %>
           </td>
-          <td>
+          <td class="align-middle">
             <%= cart_item.amount %>
           </td>
-          <td>
+          <td class="align-middle">
             <% subtotal = (cart_item.item.with_tax_price*cart_item.amount).to_i %>
             <%= subtotal.to_s(:delimited) %>
           </td>

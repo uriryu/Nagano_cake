@@ -33,10 +33,10 @@
       </td>
       <td>
         <span>
-          <% if customer.is_deleted == "有効" %>
-            <span class="text-success font-weight-bold"><%= customer.is_deleted %></span>
+          <% if customer.is_deleted == false %>
+            <span class="text-success font-weight-bold">有効</span>
           <% else %>
-            <span class="text-secondary font-weight-bold"><%= customer.is_deleted %></span>
+            <span class="text-secondary font-weight-bold">退会</span>
           <% end %>
         </span>
       </td>
