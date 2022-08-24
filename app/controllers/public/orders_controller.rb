@@ -11,7 +11,7 @@ class Public::OrdersController < ApplicationController
     @order.customer_id = current_customer.id
     @order.save
 
-    # order_detailに保存する。
+    # order_detailにカートの中身を保存する
     current_customer.cart_items.each do |cart_item|
       @order_detail = OrderDetail.new
       @order_detail.order_id = @order.id
@@ -35,7 +35,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.all
+    @orders = current_customer.orders.all
     @order_detail = OrderDetail.all
   end
 
